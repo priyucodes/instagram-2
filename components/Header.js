@@ -63,7 +63,7 @@ const Header = () => {
           <div className="relative navBtn">
             <PaperAirplaneIcon className="navBtn -rotate-45" />
             <div className="absolute bg-red-500 -top-2 -right-2 rounded-full text-xs w-5 h-5 flex items-center justify-center animate-pulse text-white">
-              3
+              5
             </div>
           </div>
           <PlusCircleIcon className="navBtn" />
