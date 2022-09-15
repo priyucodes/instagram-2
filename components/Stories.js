@@ -18,7 +18,7 @@ const Stories = () => {
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({
       ...createRandomUser(),
-      id: 1,
+      id: i,
     }));
     setSuggestions(suggestions);
   }, []);
