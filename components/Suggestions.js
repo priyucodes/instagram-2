@@ -15,7 +15,7 @@ const createRandomUser = () => {
 const Suggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
   useEffect(() => {
-    const suggestions = [...Array(20)].map((_, i) => ({
+    const suggestions = [...Array(10)].map((_, i) => ({
       ...createRandomUser(),
       id: i,
     }));

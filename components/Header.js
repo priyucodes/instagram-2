@@ -95,7 +95,7 @@ const Header = () => {
               <HeartIcon className="navBtn" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={session.user?.image || ''}
+                src={session.user?.image}
                 alt="profile pic"
                 className="h- w-10 rounded-full cursor-pointer"
                 onClick={signOut}

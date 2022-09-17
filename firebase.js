@@ -3,7 +3,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getStorage } from 'firebase/storage';
-import { getFireStore } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'instagram-2yt.firebaseapp.com',
@@ -16,7 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase (if no apps found (len===null) then create else use an existing app)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-const db = getFireStore();
+const db = getFirestore();
 const storage = getStorage();
 
 export { app, db, storage };
