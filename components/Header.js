@@ -18,7 +18,10 @@ import {
   Bars3Icon,
 } from '@heroicons/react/24/outline';
 import { HomeIcon } from '@heroicons/react/24/solid';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 const Header = () => {
+  const { data: session, status } = useSession();
   return (
     <header className="sticky top-0 shadow-md border-b bg-white z-50">
       <div className="flex justify-between bg-white max-w-6xl mx-5 lg:mx-auto">
@@ -59,23 +62,33 @@ const Header = () => {
         </div>
         {/* Right */}
         <div className="flex items-center justify-end space-x-4">
-          <HomeIcon className="navBtn" />
-          <div className="relative navBtn">
-            <PaperAirplaneIcon className="navBtn -rotate-45" />
-            <div className="absolute bg-red-500 -top-2 -right-2 rounded-full text-xs w-5 h-5 flex items-center justify-center animate-pulse text-white">
-              5
-            </div>
-          </div>
-          <PlusCircleIcon className="navBtn" />
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/1200px-Elon_Musk_Royal_Society_%28crop2%29.jpg"
-            alt="profile pic"
-            className="h-10 rounded-full cursor-pointer"
-          />
+          <Link href="/">
+            <HomeIcon className="navBtn" />
+          </Link>
           <Bars3Icon className="h-8 md:hidden cursor-pointer" />
+
+          {session ? (
+            <>
+              <div className="relative navBtn">
+                <PaperAirplaneIcon className="navBtn -rotate-45" />
+                <div className="absolute bg-red-500 -top-2 -right-2 rounded-full text-xs w-5 h-5 flex items-center justify-center animate-pulse text-white">
+                  5
+                </div>
+              </div>
+              <PlusCircleIcon className="navBtn" />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={session.user?.image || ''}
+                alt="profile pic"
+                className="h- w-10 rounded-full cursor-pointer"
+                onClick={signOut}
+              />
+            </>
+          ) : (
+            <button onClick={signIn}>Sign In</button>
+          )}
         </div>
       </div>
     </header>
