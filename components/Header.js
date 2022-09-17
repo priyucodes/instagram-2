@@ -20,14 +20,23 @@ import {
 import { HomeIcon } from '@heroicons/react/24/solid';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../atoms/modalAtom';
 const Header = () => {
   const { data: session, status } = useSession();
+  const [open, setOpen] = useRecoilState(modalState);
+  // const open = useRecoilValue(modalState); read only value
+  const router = useRouter();
   return (
     <header className="sticky top-0 shadow-md border-b bg-white z-50">
       <div className="flex justify-between bg-white max-w-6xl mx-5 lg:mx-auto">
         {/* Left */}
         {/* Added relative so the nextImage is absolute to its parent container */}
-        <div className="relative hidden lg:inline-grid w-24 cursor-pointer">
+        <div
+          onClick={() => router.push('/')}
+          className="relative hidden lg:inline-grid w-24 cursor-pointer"
+        >
           <Image
             alt="instagram logo"
             src="https://links.papareact.com/ocw"
@@ -37,7 +46,10 @@ const Header = () => {
         </div>
 
         {/* flex-shrink-0 prevents the container/image to be shrinekd  */}
-        <div className="relative lg:hidden w-10 flex-shrink-0 cursor-pointer">
+        <div
+          onClick={() => router.push('/')}
+          className="relative lg:hidden w-10 flex-shrink-0 cursor-pointer"
+        >
           <Image
             alt="instagram logo"
             src="https://links.papareact.com/jjm"
@@ -75,7 +87,10 @@ const Header = () => {
                   5
                 </div>
               </div>
-              <PlusCircleIcon className="navBtn" />
+              <PlusCircleIcon
+                className="navBtn"
+                onClick={() => setOpen(true)}
+              />
               <UserGroupIcon className="navBtn" />
               <HeartIcon className="navBtn" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
